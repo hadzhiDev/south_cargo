@@ -1,0 +1,23 @@
+{% load static %}
+<div class="calendar-filter">
+    <input type="date" id="date-filter" name="date" value="{{ request.GET.date }}">
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log('Date filter loaded');
+        const dateInput = document.getElementById("date-filter");
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedDate = urlParams.get("date");
+
+        if (selectedDate) {
+            dateInput.value = selectedDate; // Restore selected date after reload
+        }
+
+        dateInput.addEventListener("change", function () {
+            console.log("Date changed:", this.value);
+            const url = new URL(window.location.href);
+            url.searchParams.set("date", this.value);
+            window.location.href = url.toString();
+        });
+    });
+</script>

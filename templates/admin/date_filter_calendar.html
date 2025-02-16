@@ -1,0 +1,7 @@
+{% load i18n static %}
+
+<div class="admin-datepicker-filter">
+    <input type="date" id="date-picker" name="{{ spec.parameter_name }}"
+           value="{{ request.GET.spec.parameter_name|default_if_none:'' }}"
+           onchange="this.form.submit();">
+</div>
