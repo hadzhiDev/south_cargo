@@ -11,21 +11,17 @@ class ClientBatchImport(models.Model):
     clients_text = models.TextField(verbose_name="Список клиентов")
 
     def save(self, *args, **kwargs):
-        """
-        When saving, process the clients_text field and create Client objects.
-        """
         lines = self.clients_text.strip().split("\n")
         created_count = 0
         existing_count = 0
 
         for line in lines:
-            parts = line.strip().split("+", 1)  # Split by the first "+"
+            parts = line.strip().split("+", 1)
             if len(parts) == 2:
                 code = parts[0].strip()
                 wa_number = "+" + parts[1].replace(" ", "").strip()
 
-                # Check if client already exists
-                client, created = Client.objects.get_or_create(code=code, wa_number=wa_number)
+                client, created = Client.objects.get_or_create(wa_number=wa_number)
                 if created:
                     created_count += 1
                 else:
@@ -41,7 +37,7 @@ class Load(models.Model):
         verbose_name = 'Груз'
         verbose_name_plural = 'Грузы'
 
-    code = models.CharField(max_length=200, verbose_name='код', null=True, blank=True)
+    code = models.TextField(max_length=1000, verbose_name='штрих-код', null=True, blank=True)
     date = models.DateField(verbose_name='дата')
     kilo = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='кг', null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='цена', null=True, blank=True)

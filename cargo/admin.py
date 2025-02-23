@@ -32,7 +32,7 @@ class LoadAdmin(admin.ModelAdmin):
                 chat_id = client.whatsapp_chat_id
 
                 message = f"""👋 Ассалоому Алейкум, урматтуу кардар {client.code}, {load.date} Складка түшкөн жүк келди! \n
-🔢 Код: {load.code} \n
+🔢 Штрих-код: \n {load.code} \n
 💰 Төлөм: {load.price} сом \n        
 📍 Биздин дарек: Масалиева 46а, болжол Келечек базары
 🕙 10:00 - 17:30 га чейин алып кетсеңиз болот
@@ -58,7 +58,7 @@ class LoadAdmin(admin.ModelAdmin):
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
     list_display = ('code', 'wa_number', 'name')
-    list_filter = ('code', 'wa_number', 'name')
+    # list_filter = ('code', 'wa_number', 'name')
     search_fields = ('code', 'wa_number', 'name')
 
 
