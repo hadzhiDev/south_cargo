@@ -39,7 +39,7 @@ class Load(models.Model):
 
     code = models.TextField(max_length=1000, verbose_name='штрих-код', null=True, blank=True)
     date = models.DateField(verbose_name='дата')
-    kilo = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='кг', null=True, blank=True)
+    # kilo = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='кг', null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='цена', null=True, blank=True)
     client = models.ForeignKey('Client', on_delete=models.SET_NULL, null=True, blank=True, verbose_name='клиент', related_name='loads')
     sent_to_client = models.BooleanField(default=False, verbose_name='отправлено клиенту')

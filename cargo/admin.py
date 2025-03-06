@@ -14,9 +14,9 @@ greenAPI = API.GreenAPI(
 
 @admin.register(Load)
 class LoadAdmin(admin.ModelAdmin):
-    list_display = ('code', 'kilo', 'date', 'client', 'sent_to_client')
+    list_display = ('code', 'date', 'client', 'sent_to_client')
     list_filter = (DateFilter,) 
-    search_fields = ('code', 'kilo', 'date', 'client')
+    search_fields = ('code', 'date', 'client__code', 'client__wa_number',)
     actions = ['send_to_whatsapp']
     readonly_fields = ('sent_to_client',)
     autocomplete_fields = ['client']
